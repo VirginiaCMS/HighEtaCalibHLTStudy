@@ -67,7 +67,7 @@ genParticles  = Handle  ('std::vector<reco::GenParticle>')
 # input 
 events = Events([
 'root://cms-xrd-global.cern.ch//store/mc/RunIISpring15Digi74/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/GEN-SIM-RAW/AVE_40_BX_25ns_tsg_MCRUN2_74_V7-v2/00000/047993F0-27F5-E411-A55F-0025B3E05DAC.root',
-#'root://cms-xrd-global.cern.ch//store/mc/RunIISpring15Digi74/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/GEN-SIM-RAW/AVE_40_BX_25ns_tsg_MCRUN2_74_V7-v2/00000/127E44D8-A4F4-E411-BB3A-00259073E410.root'
+'root://cms-xrd-global.cern.ch//store/mc/RunIISpring15Digi74/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/GEN-SIM-RAW/AVE_40_BX_25ns_tsg_MCRUN2_74_V7-v2/00000/127E44D8-A4F4-E411-BB3A-00259073E410.root'
 ])
 
 # output
@@ -86,7 +86,9 @@ hGenMeeBeforeDecay.Sumw2()
 hGenMZ.Sumw2()
 
 # print details?
-debug = 0
+debug = 2
+# max N events to process?
+nmax = 10
 
 N=0.0
 for event in events:
@@ -142,7 +144,7 @@ for event in events:
     hGenMee.Fill((genEle1.p4()+genEle2.p4()).M())
 
     # break after some events
-    #if N>10: break
+    if nmax!=-1 and N>nmax: break
 
 # write output
 f.cd()
