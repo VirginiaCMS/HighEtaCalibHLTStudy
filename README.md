@@ -1,6 +1,9 @@
 
 A collection of codes and materials for the HLT studies for the High Eta calibration.
 
+In folder testpath/
+cp /afs/cern.ch/user/f/fxia/work/public/RelVal_DigiL1Raw_GRun_MC.root .
+cmsRun testpathv4.py
 
 Install:
 
