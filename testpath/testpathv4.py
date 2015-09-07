@@ -3387,6 +3387,16 @@ process.hltEgammaElectronPixelSeeds = cms.EDProducer( "ElectronSeedProducer",
         originRadius = cms.double( 0.2 ),
         VertexProducer = cms.InputTag( "dummyVertices" )
       ),
+      SeedCreatorPSet = cms.PSet(
+        ComponentName = cms.string( "SeedFromConsecutiveHitsCreator" ),
+        forceKinematicWithRegionDirection = cms.bool( False ),
+        magneticField = cms.string('ParabolicMf'),
+        OriginTransverseErrorMultiplier = cms.double( 1.0 ),
+        MinOneOverPtError = cms.double( 1.0 ),
+        propagator = cms.string( "PropagatorWithMaterialParabolicMf" ),
+        SeedMomentumForBOFF = cms.double( 5.0 ),
+        TTRHBuilder = cms.string( "hltESPTTRHBWithTrackAngle" )
+      ),
       dynamicPhiRoad = cms.bool( False ),
       ePhiMax1 = cms.double( 0.04 ),
       measurementTrackerName = cms.string( "hltESPMeasurementTracker" ),
@@ -3667,7 +3677,7 @@ process.hltIter0ElectronsPixelSeedsFromPixelTracks = cms.EDProducer( "SeedGenera
       magneticField = cms.string('ParabolicMf'),
       SeedMomentumForBOFF = cms.double( 5.0 ),
       OriginTransverseErrorMultiplier = cms.double( 1.0 ),
-      TTRHBuilder = cms.string( "WithTrackAngle" ),
+      TTRHBuilder = cms.string( "hltESPTTRHBWithTrackAngle" ),
       MinOneOverPtError = cms.double( 1.0 ),
       propagator = cms.string( "PropagatorWithMaterial" )
     ),
@@ -4972,7 +4982,8 @@ process.HLTSchedule = cms.Schedule( *(process.HLTriggerFirstPath, process.HLT_El
 
 process.source = cms.Source( "PoolSource",
     fileNames = cms.untracked.vstring(
-        'file:RelVal_Raw_GRun_MC.root',
+      #  'file:RelVal_Raw_GRun_MC.root',
+      'file:/afs/cern.ch/user/f/fxia/work/public/RelVal_DigiL1Raw_GRun_MC.root',
     ),
     inputCommands = cms.untracked.vstring(
         'keep *'
